@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Serwis telefonów</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/style.css' %}">
+</head>
+<body>
+<header>
+    <div id="header-left">Serwis telefonów w Polsce</div>
+    <div id="header-right"><p>Autor: Damian Cichocki<br>Grupa: WCY21IJ1N1</p></div>
+    <div id="obraz"><img src="{% static '/images/logo_wcy.png' %}" alt="logo-wcy" id="obraz"></div>
+</header>
+<div id="content-main">
+    <div class="left-content">
+        <div class="left-content-text">
+            <p>Poniższy przycisk przenosi do strony, w której wykonuje się proces rejestracji telefonów<br> Każdy numer przypadku jest indywidualny i unikatowy dla konkretnego telefonu,
+            jednakże istnieje możliwość późniejszej edycji poszczególnych wartości w przypadku jak imei lub model</p>
+        </div>
+        <div>
+            <button class="butt" onclick="window.location.href ='http://127.0.0.1:8000/PhoneService/Rejestracja/'">Rejestracja</button>
+        </div>
+    </div>
+    <div class="right-content">
+        <div class="right-content-text">
+            <p>Poniższy przycisk przenosi do strony, w której wykonuje się proces wyszukiwania<br> Na stronie wyświetlą się wszystkie przypadki wraz z ich wartościami, ale istenije
+            również możliwość wyszukwania konrktengo przypadku po numerze przypadku lub numerze IMEI</p>
+        </div>
+        <div>
+            <button class="butt" onclick="window.location.href ='http://127.0.0.1:8000/PhoneService/Wyszukiwanie/'">Wyszukiwanie</button>
+        </div>
+    </div>
+    <div class="left-content">
+        <div class="left-content-text">
+            <p>Poniższy przycisk przenosi do strony, w której wykonuje się proces edytowania<br> Na stronie należy wpisać numer przypadku i strona zostanie przekierowana do
+                edycji konkretnego przypadku gdzie można zmienić takie wartości jak: numer IMEI lub operatora</p>
+        </div>
+        <div>
+            <button class="butt" onclick="window.location.href ='http://127.0.0.1:8000/PhoneService/Edycja/'">Edycja</button>
+        </div>
+    </div>
+    <div class="right-content">
+        <div class="right-content-text">
+            <p>Poniższy przycisk przenosi do strony, w której wykonuje się proces usuwania<br> Na stronie występuje możliwośc wpisania jedynie numeru przypadku, a następnie należy potwierdzić czy na pewno
+            chcemy usunąć dany przypadek</p>
+        </div>
+        <div>
+            <button class="butt" onclick="window.location.href ='http://127.0.0.1:8000/PhoneService/Usuwanie/'">Usuwanie</button>
+        </div>
+    </div>
+</div>
+<footer><p>Strona została wykonana przez Damiana Cichockiego w celu zaliczenia przedmiotu Programowanie w językach funkcyjnych.
+    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ repair.nr_case}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/style2.css' %}">
+</head>
+<body>
+    <header>
+    <div id="header-left">Serwis telefonów w Polsce</div>
+    <div id="header-right"><p>Autor: Damian Cichocki<br>Grupa: WCY21IJ1N1</p></div>
+    <div id="obraz"><img src="{% static '/images/logo_wcy.png' %}" alt="logo-wcy" id="obraz"></div>
+    <div><a href="http://127.0.0.1:8000/PhoneService/Wyszukiwanie/"><img src="{% static '/images/back_arrow.png' %}" alt="back_arrow" id="back-arrow"></a></div>
+</header>
+<div id="content-main">
+    <div id="result-repair">
+       <table>
+            <thead>
+            <tr>
+                <th>Numer przypadku</th>
+                <th>IMEI</th>
+                <th>Tecznik</th>
+                <th>Model</th>
+                <th>Status</th>
+                <th>Operator</th>
+                <th>Data przyjęcia</th>
+                <th>Data zakończenia</th>
+            </tr>
+            </thead>
+           <tr>
+                <td>{{ repair.nr_case}}</td>
+                <td>{{ repair.imei }}</td>
+                <td>{{ repair.id_worker.acronym }}</td>
+                <td>{{ repair.id_phone.model }}</td>
+                <td>{{ repair.status }}</td>
+                <td>{{ repair.operator }}</td>
+                {% if repair.admission_date != None %}
+                    <td>{{ repair.admission_date }}</td>
+                {% else %}
+                    <td> </td>
+                {% endif %}
+               {% if repair.end_date != None %}
+                    <td>{{ repair.admission_date }}</td>
+                {% else %}
+                    <td> </td>
+                {% endif %}
+           </tr>
+        </table>
+    </div>
+</div>
+<footer><p>Strona została wykonana przez Damiana Cichockiego w celu zaliczenia przedmiotu Programowanie w językach funkcyjnych.
+    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL.</p>
+</footer>
+</body>
+</html>
