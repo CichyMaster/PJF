@@ -138,6 +138,50 @@ header
     padding: 8px;
 }
 
+#rejestration{
+    width: 50%;
+    height: 70vh;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+    background-color: rgba(128, 128, 128, 0.4);
+    font-size: 34px;
+}
+
+#left-form{
+    font-size: 26px;
+    float: left;
+    text-align: right;
+    width: 40%;
+    line-height: 2.5;
+}
+
+#right-form{
+    font-size: 26px;
+    float: left;
+    text-align: left;
+    width: 60%;
+    line-height: 2.5;
+}
+
+#right-form textarea{
+    padding-bottom: 5%;
+}
+
+#right-form input,
+#right-form select{
+    font-size: 26px;
+}
+
+
+#rejestration-button{
+    font-size: 40px;
+    float: right;
+    margin-right: 15%;
+}
+
 footer{
     float: left;
     background-color: black;

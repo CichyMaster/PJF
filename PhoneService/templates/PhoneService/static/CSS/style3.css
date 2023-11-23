@@ -1,0 +1,78 @@
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+header
+{
+    background: #515362;
+    width: 100%;
+    height: 10%;
+    color: white;
+    margin: 0;
+
+}
+#header-left{
+    display: flex;
+    align-items: center;
+    float: left;
+    width: 35%;
+    height: 100%;
+    text-align: left;
+    font-size: 45px;
+    margin: 0;
+    padding-left: 15%;
+
+}
+
+#header-right{
+    float: left;
+    width: 30%;
+    height: 100%;
+    text-align: right;
+    font-size: 20px;
+    padding-right: 1%;
+}
+
+#obraz{
+    float: left;
+    width: 100px;
+    height: 100%;
+    padding-right: 5%;
+}
+
+#back-arrow{
+    float: left;
+    width: 80px;
+    height: 80%;
+}
+
+#content-main
+{
+    float: left;
+    width: 100%;
+    min-height: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+#edition-search{
+    width: 50%;
+    height: 80vh;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: rgba(128, 128, 128, 0.4);
+}
+
+footer{
+    float: left;
+    background-color: black;
+    color: white;
+    width: 100%;
+    height: 10%;
+    margin-top: auto;
+}
