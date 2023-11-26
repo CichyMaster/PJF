@@ -1,12 +1,17 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, redirect
+import base64
+from datetime import datetime
+from io import BytesIO
 
-from PhoneService.forms import SearchForm, RejestrationForm
+from django.shortcuts import render, redirect
+from PhoneService.forms import SearchForm, RejestrationForm, EditionForm, DeleteForm
 from PhoneService.models import Repairs, Phones, Workers
-
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('agg')
 
 def index(request):
     return render(request, "PhoneService/index.html")
+
 
 def create(request):
     if request.method == 'POST':
@@ -34,6 +39,7 @@ def create(request):
         form = RejestrationForm()
     return render(request, 'PhoneService/create.html', {'form': form})
 
+
 def read(request):
     list_of_phones = Repairs.objects.all().order_by('nr_case')
     form = SearchForm()
@@ -44,26 +50,147 @@ def read(request):
             return redirect(f'http://127.0.0.1:8000/PhoneService/Wyszukiwanie/{search_value}')
     return render(request, "PhoneService/read.html", {"list_of_phones": list_of_phones, 'form': form})
 
+
 def result_view_by_case(request, nr_case):
-    repair = get_object_or_404(Repairs, nr_case=nr_case)
+    repair = Repairs.objects.filter(nr_case=nr_case)
     return render(request, 'PhoneService/specific_case.html', {'repair': repair})
 
-def result_view_by_IMEI(request, IMEI):
-    repair = get_object_or_404(Repairs, imei=IMEI)
+
+def result_view_by_imei(request, imei):
+    repair = Repairs.objects.filter(imei=imei)
+    print(repair)
     return render(request, 'PhoneService/specific_case.html', {'repair': repair})
+
 
 def edit(request):
-    return render(request, 'PhoneService/edit.html')
+    form = EditionForm()
+    if request.method == 'POST':
+        form = EditionForm(request.POST)
+        if 'fill_values' in request.POST:
+            if form.is_valid():
+                search_value = form.cleaned_data['search_value']
+                repair = Repairs.objects.filter(nr_case=search_value).first()
+                if repair:
+                    form = EditionForm(initial={
+                        'nr_case': repair.nr_case,
+                        'imei': repair.imei,
+                        'status': repair.status,
+                        'operator': repair.operator,
+                        'admission_date': repair.admission_date,
+                        'end_date': repair.end_date,
+                        'model': repair.id_phone,
+                        'workers': repair.id_worker,
+                    })
+        elif 'update_record' in request.POST:
+            if form.is_valid():
+                search_value = form.cleaned_data['nr_case']
+                repair = Repairs.objects.filter(nr_case=search_value).first()
+                if repair:
+                    repair.nr_case = form.cleaned_data['nr_case']
+                    repair.imei = form.cleaned_data['imei']
+                    repair.status = form.cleaned_data['status']
+                    repair.operator = form.cleaned_data['operator']
+                    repair.admission_date = form.cleaned_data['admission_date']
+                    repair.end_date = form.cleaned_data['end_date']
+                    Phones.id_phone = form.cleaned_data['model']
+                    Workers.id_worker = form.cleaned_data['workers']
+                    if repair.admission_date is not None and repair.end_date is not None:
+                        if repair.admission_date > repair.end_date:
+                            raise ValueError("Data przyjęcia jest później niż data zakonczenia")
+                    repair.save()
+                    return redirect(f'http://127.0.0.1:8000/PhoneService/Edycja/')
+            else:
+                print(form.errors)
+    return render(request, "PhoneService/edit.html", {"form": form})
 
-def edit_by_IMEI(request, IMEI):
-    repair = get_object_or_404(Repairs, imei=IMEI)
-    return render(request, 'PhoneService/edit_case.html', {'repair': repair})
-
-def edit_by_case(request, nr_case):
-    repair = get_object_or_404(Repairs, nr_case=nr_case)
-    return render(request, 'PhoneService/edit_case.html', {'repair': repair})
 
 def delete(request):
-    return HttpResponse("Strona do usuwania")
+    form = DeleteForm()
+    repair = None
+
+    if request.method == 'POST':
+        form = DeleteForm(request.POST)
+        if form.is_valid():
+            search_value = form.cleaned_data['search_value']
+            if 'search-button' in request.POST:
+                print(search_value)
+                if search_value:
+                    repair = Repairs.objects.filter(nr_case=search_value).first()
+
+            elif 'delete-button' in request.POST:
+                    print(search_value)
+                    if search_value:
+                        repair = Repairs.objects.filter(nr_case=search_value).first()
+                        if repair:
+                            repair.delete()
+                            return redirect(f'http://127.0.0.1:8000/PhoneService/Usuwanie/')
+
+    return render(request, "PhoneService/delete.html", {"repair": repair, 'form': form})
 
 
+def statistic(request):
+    if request.method == 'POST':
+        if 'Chart1' in request.POST:
+            workers_acronyms = Workers.objects.all().order_by('acronym').values_list('acronym', flat=True)
+            workers_dict = {}
+
+            for worker in workers_acronyms:
+                workers_dict[worker] = 0
+            last_month_repairs = Repairs.objects.filter(end_date__month=datetime.now().date().month - 1)
+
+            for worker in last_month_repairs:
+                if worker.id_worker.acronym:
+                    workers_dict[worker.id_worker.acronym] += 1
+
+            label_of_workers = list(workers_dict.keys())
+            label_of_values = list(workers_dict.values())
+
+            #Tworzenie wykresu
+            plt.bar(label_of_workers, label_of_values)
+            plt.xlabel('Pracownicy')
+            plt.ylabel('Liczba zakonczonych telefonów')
+            plt.title('Rozkład zakończonych telefonów z ostatniego miesiąca')
+
+            #Zapisanie wykresu jako obrazek
+            buffer = BytesIO()
+            plt.savefig(buffer, format='png')
+            buffer.seek(0)
+            image_png = buffer.getvalue()
+            buffer.close()
+
+            #Konwersja obrazka na base64
+            graphic = base64.b64encode(image_png).decode('utf-8')
+            plt.clf()
+            #przekazanie wykresu do szablonu
+            context = {'graphic': graphic}
+        elif 'Chart2' in request.POST:
+
+            all_repairs = Repairs.objects.all()
+            repairs_dict = {'Naprawa': 0, 'Reklamacja': 0, 'Gwarancyjna': 0}
+
+            for repair in all_repairs:
+                repairs_dict[repair.status] += 1
+
+            label_of_statuses = list(repairs_dict.keys())
+            label_of_repairs = list(repairs_dict.values())
+
+            # Tworzenie wykresu
+            plt.pie(label_of_repairs, labels=label_of_statuses, autopct='%1.1f%%')
+            plt.title('Rozkład dokonanych napraw względem rodzaju naprawy')
+
+            # Zapisanie wykresu jako obrazek
+            buffer = BytesIO()
+            plt.savefig(buffer, format='png')
+            buffer.seek(0)
+            image_png = buffer.getvalue()
+            buffer.close()
+
+            # Konwersja obrazka na base64
+            graphic = base64.b64encode(image_png).decode('utf-8')
+            plt.clf()
+            # przekazanie wykresu do szablonu
+            context = {'graphic': graphic}
+
+    else:
+        context = {'graphic': 'Nie wybrano wykresu'}
+    return render(request, "PhoneService/statistics.html", context)

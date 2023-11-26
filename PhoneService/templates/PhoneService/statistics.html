@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statystyka</title>
+     <link rel="stylesheet" type="text/css" href="{% static 'CSS/style.css' %}">
+</head>
+<body>
+<header>
+    <div id="header-left">Serwis telefonów w Polsce</div>
+    <div id="header-right"><p>Autor: Damian Cichocki<br>Grupa: WCY21IJ1N1</p></div>
+    <div id="obraz"><img src="{% static '/images/logo_wcy.png' %}" alt="logo-wcy" id="obraz"></div>
+    <div><a href="http://127.0.0.1:8000/PhoneService/"><img src="{% static '/images/back_arrow.png' %}" alt="back_arrow" id="back-arrow"></a></div>
+</header>
+<div id="content-main">
+    <form method="post">
+        {% csrf_token %}
+        <div id="buttons">
+            <div id="left-button">
+                <button type="submit" name="Chart1" class="chart">Wykres 1</button>
+            </div>
+            <div id="right-button">
+                <button type="submit" name="Chart2" class="chart">Wykres 2</button>
+            </div>
+        </div>
+        <div id="charts">
+            <img src="data:image/png;base64,{{ graphic }}" alt="Wykres">
+        </div>
+    </form>
+</div>
+<footer><p>Strona została wykonana przez Damiana Cichockiego w celu zaliczenia przedmiotu Programowanie w językach funkcyjnych.
+    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL. <button class="statistic-button" onclick="window.location.href ='http://127.0.0.1:8000/PhoneService/Statystyka/'">Statystyki</button></p>
+</footer>
+</body>
+</html>

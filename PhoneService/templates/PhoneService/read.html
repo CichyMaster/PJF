@@ -16,11 +16,10 @@
 </header>
 <div id="content-main">
     <div id="searchbar">
-        <p>Wyszukaj</p>
         <form method="post">
             {% csrf_token %}
             {{ form }}
-            <button type="submit">Szukaj</button>
+            <button type="submit" id="search-button">Szukaj</button>
         </form>
     </div>
     <div id="search-table">
@@ -52,7 +51,7 @@
                     <td> </td>
                 {% endif %}
                {% if phone.end_date != None %}
-                    <td>{{ phone.admission_date }}</td>
+                    <td>{{ phone.end_date }}</td>
                 {% else %}
                     <td> </td>
                 {% endif %}
@@ -65,7 +64,7 @@
     </div>
 </div>
 <footer><p>Strona została wykonana przez Damiana Cichockiego w celu zaliczenia przedmiotu Programowanie w językach funkcyjnych.
-    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL.</p>
+    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL. <button class="statistic-button" onclick="window.location.href ='http://127.0.0.1:8000/PhoneService/Statystyka/'">Statystyki</button></p>
 </footer>
 </body>
 </html>

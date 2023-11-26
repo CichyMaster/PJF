@@ -14,12 +14,40 @@
     <div><a href="http://127.0.0.1:8000/PhoneService/"><img src="{% static '/images/back_arrow.png' %}" alt="back_arrow" id="back-arrow"></a></div>
 </header>
 <div id="content-main">
-    <div id="edition-search">
-        <p>Proszę wprowadzić numer przypadku lub numer IMEI interesującego Cię telefonu w celu jego edycji</p>
-    </div>
+     <form method="post">
+         {% csrf_token %}
+            <div id="edition-search">
+                <div id="first-form">
+                    {{ form.search_value.label }}
+                    {{ form.search_value }}
+                        <button type="submit" id="edition-search-button" name="fill_values">Szukaj</button>
+                </div>
+                <div id="second-left-form">
+                    {{ form.nr_case.label }}<br>
+                    {{ form.imei.label }}<br>
+                    {{ form.status.label }}<br>
+                    {{ form.operator.label }}<br>
+                    {{ form.model.label }}<br>
+                    {{ form.workers.label }}<br>
+                    {{ form.admission_date.label }}<br>
+                    {{ form.end_date.label }}
+                </div>
+                <div id="second-right-form">
+                    {{ form.nr_case }}<br>
+                    {{ form.imei }}<br>
+                    {{ form.status }}<br>
+                    {{ form.operator }}<br>
+                    {{ form.model }}<br>
+                    {{ form.workers }}<br>
+                    {{ form.admission_date }}<br>
+                    {{ form.end_date }}
+                    <button id="edit-button" type="submit" name="update_record">Edytuj</button>
+                </div>
+            </div>
+     </form>
 </div>
 <footer><p>Strona została wykonana przez Damiana Cichockiego w celu zaliczenia przedmiotu Programowanie w językach funkcyjnych.
-    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL.</p>
+    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL. <button class="statistic-button" onclick="window.location.href ='http://127.0.0.1:8000/PhoneService/Statystyka/'">Statystyki</button></p>
 </footer>
 
 </body>

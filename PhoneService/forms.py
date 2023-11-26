@@ -33,3 +33,27 @@ class RejestrationForm(forms.Form):
     model = forms.ChoiceField(label='Model telefonu:', choices=list_of_models)
     workers = forms.ChoiceField(label='Technik:', choices=list_of_workers)
 
+class EditionForm(forms.Form):
+    search_value = forms.CharField(label='Numer przypadku', max_length=9, required=False)
+
+    STATUS_CHOICES = (
+        ("Naprawa", "Naprawa"),
+        ("Gwarancyjna", "Gwarancyjna"),
+        ("Reklamacja", "Reklamacja"),
+    )
+    list_of_models = Phones.objects.all().values_list('model', 'model')
+    list_of_workers = Workers.objects.all().values_list('acronym', 'acronym')
+
+    nr_case = forms.CharField(label='Numer przypadku:', max_length=9, required=False, widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    imei = forms.IntegerField(label='IMEI:', max_value=99999999999999999, required=False)
+    status = forms.ChoiceField(label='Rodzaj naprawy:', choices=STATUS_CHOICES, required=False)
+    operator = forms.CharField(label='Operator:', max_length=50, required=False)
+    admission_date = forms.DateField(label='Data przyjęcia:', required=False)
+    end_date = forms.DateField(label='Data zakończenia:', required=False)
+    model = forms.ChoiceField(label='Model telefonu:', choices=list_of_models, required=False)
+    workers = forms.ChoiceField(label='Technik:', choices=list_of_workers, required=False)
+
+class DeleteForm(forms.Form):
+    search_value = forms.CharField(label='Numer przypadku', max_length=9, required=False)
+
+

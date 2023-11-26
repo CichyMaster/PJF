@@ -20,7 +20,7 @@
             <tr>
                 <th>Numer przypadku</th>
                 <th>IMEI</th>
-                <th>Tecznik</th>
+                <th>Technik</th>
                 <th>Model</th>
                 <th>Status</th>
                 <th>Operator</th>
@@ -28,29 +28,31 @@
                 <th>Data zakończenia</th>
             </tr>
             </thead>
-           <tr>
-                <td>{{ repair.nr_case}}</td>
-                <td>{{ repair.imei }}</td>
-                <td>{{ repair.id_worker.acronym }}</td>
-                <td>{{ repair.id_phone.model }}</td>
-                <td>{{ repair.status }}</td>
-                <td>{{ repair.operator }}</td>
-                {% if repair.admission_date != None %}
-                    <td>{{ repair.admission_date }}</td>
+                {% for phone in repair %}
+            <tr>
+                <td>{{ phone.nr_case}}</td>
+                <td>{{ phone.imei }}</td>
+                <td>{{ phone.id_worker.acronym }}</td>
+                <td>{{ phone.id_phone.model }}</td>
+                <td>{{ phone.status }}</td>
+                <td>{{ phone.operator }}</td>
+                {% if phone.admission_date != None %}
+                    <td>{{ phone.admission_date }}</td>
                 {% else %}
                     <td> </td>
                 {% endif %}
-               {% if repair.end_date != None %}
-                    <td>{{ repair.admission_date }}</td>
+               {% if phone.end_date != None %}
+                    <td>{{ phone.end_date }}</td>
                 {% else %}
                     <td> </td>
                 {% endif %}
-           </tr>
+            </tr>
+                {% endfor %}
         </table>
     </div>
 </div>
 <footer><p>Strona została wykonana przez Damiana Cichockiego w celu zaliczenia przedmiotu Programowanie w językach funkcyjnych.
-    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL.</p>
+    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL. <button class="statistic-button" onclick="window.location.href ='http://127.0.0.1:8000/PhoneService/Statystyka/'">Statystyki</button></p>
 </footer>
 </body>
 </html>

@@ -22,25 +22,25 @@
                 {{ form.imei.label }}<br>
                 {{ form.status.label }}<br>
                 {{ form.operator.label }}<br>
-                {{ form.admission_date.label }}<br>
                 {{ form.model.label }}<br>
-                {{ form.workers.label }}
+                {{ form.workers.label }}<br>
+                {{ form.admission_date.label }}
             </div>
             <div id="right-form">
                 {{ form.nr_case }}<br>
                 {{ form.imei }}<br>
                 {{ form.status }}<br>
                 {{ form.operator }}<br>
-                {{ form.admission_date }}<br>
                 {{ form.model }}<br>
-                {{ form.workers }}
+                {{ form.workers }}<br>
+                {{ form.admission_date }}
                 <button id="rejestration-button" type="submit">Rejestruj</button>
                 </div>
             </form>
             </div>
     </div>
 <footer><p>Strona została wykonana przez Damiana Cichockiego w celu zaliczenia przedmiotu Programowanie w językach funkcyjnych.
-    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL.</p>
+    Aplikacja webowa została utworzona za pomocą framework'a Django z zastosowaną bazą danych PostgreSQL. <button class="statistic-button" onclick="window.location.href ='http://127.0.0.1:8000/PhoneService/Statystyka/'">Statystyki</button></p>
 </footer>
 
 </body>

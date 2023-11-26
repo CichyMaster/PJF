@@ -54,11 +54,10 @@ header
     float: left;
     width: 100%;
     min-height: 80%;
-    display: flex;
-    flex-direction: column;
 }
 
 #edition-search{
+    float: left;
     width: 50%;
     height: 80vh;
     margin-left: 15%;
@@ -68,6 +67,102 @@ header
     background-color: rgba(128, 128, 128, 0.4);
 }
 
+#first-form{
+    display: flex;
+    align-items: center;
+    text-align: left;
+    float: left;
+    width: 50%;
+    height: 20%;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: rgba(128, 128, 128, 0.4);
+    font-size: 26px;
+}
+
+#second-left-form{
+    font-size: 26px;
+    float: left;
+    text-align: right;
+    width: 40%;
+    line-height: 2.5;
+}
+
+#second-right-form{
+    font-size: 26px;
+    float: left;
+    text-align: left;
+    width: 60%;
+    line-height: 2.5;
+}
+
+#edit-button{
+    font-size: 36px;
+    float: right;
+    margin-right: 25%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+#searchbar{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    float: left;
+    width: 50%;
+    height: 24vh;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: rgba(128, 128, 128, 0.4);
+    font-size: 30px;
+}
+
+#searchbar input{
+     font-size: 20px;
+}
+
+#search-button{
+    font-size: 20px;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+#search-table{
+    text-align: center;
+    float: left;
+    width: 50%;
+    height: 56vh;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: rgba(128, 128, 128, 0.4);
+}
+
+#search-table table{
+    border: 2px solid black;
+    caption-side: top;
+    border-collapse: collapse;
+}
+
+#search-table th, td{
+    border: 2px solid black;
+    padding: 8px;
+}
+
+#delete-button{
+    font-size: 26px;
+    margin-top: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
 footer{
     float: left;
     background-color: black;
@@ -75,4 +170,13 @@ footer{
     width: 100%;
     height: 10%;
     margin-top: auto;
+}
+
+.statistic-button{
+    float: right;
+    display: flex;
+    justify-content: right;
+    margin-right: 5%;
+    margin-top: 1%;
+    font-size: 26px;
 }
