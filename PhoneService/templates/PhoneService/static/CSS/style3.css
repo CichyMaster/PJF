@@ -29,13 +29,16 @@
 
     }
 
-    #header-right {
+     #header-right {
+        display: flex;
+        justify-content: right;
+        align-items: center;
         float: left;
-        width: 30%;
+        width: 23%;
         height: 100%;
         text-align: right;
         font-size: 20px;
-        padding-right: 1%;
+        padding-right: 2%
     }
 
     #obraz {
@@ -171,7 +174,17 @@
         color: white;
         width: 100%;
         height: 10%;
-        margin-top: auto;
+    }
+
+    #footer-text {
+        float: left;
+        width: 90%;
+    }
+
+    #footer-button{
+        width: 10%;
+        float: left;
+        margin-top: 1%;
     }
 
     .statistic-button {
@@ -180,7 +193,8 @@
         justify-content: right;
         margin-right: 5%;
         margin-top: 1%;
-        font-size: 26px;
+        font-size: 20px;
+        margin-left: auto;
     }
 }
 @media screen and (max-width: 1400px) {
@@ -215,6 +229,9 @@
     }
 
     #header-right {
+        display: flex;
+        justify-content: right;
+        align-items: center;
         float: left;
         width: 30%;
         height: 100%;
@@ -230,7 +247,7 @@
         justify-content: center;
         float: left;
         width: 70px;
-        height: 80%;
+        height: 100%;
     }
 
     #back-arrow {
@@ -240,7 +257,7 @@
         justify-content: center;
         float: left;
         width: 70px;
-        height: 80%;
+        height: 65px;
     }
 
     #content-main {
@@ -271,7 +288,7 @@
     }
 
     #second-left-form {
-        font-size: 26px;
+        font-size: 20px;
         float: left;
         text-align: right;
         width: 40%;
@@ -279,7 +296,7 @@
     }
 
     #second-right-form {
-        font-size: 26px;
+        font-size: 20px;
         float: left;
         text-align: left;
         width: 60%;
@@ -299,7 +316,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        text-align: left;
         float: left;
         width: 50%;
         height: 24vh;
@@ -322,8 +338,11 @@
     }
 
     #search-table {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
         text-align: center;
-        float: left;
         width: 70%;
         height: 56vh;
         margin-left: 15%;
@@ -356,7 +375,17 @@
         color: white;
         width: 100%;
         height: 10%;
-        margin-top: auto;
+    }
+
+    #footer-text {
+        float: left;
+        width: 90%;
+    }
+
+    #footer-button{
+        width: 10%;
+        float: left;
+        margin-top: 1%;
     }
 
     .statistic-button {
@@ -365,6 +394,7 @@
         justify-content: right;
         margin-right: 5%;
         margin-top: 1%;
-        font-size: 26px;
+        font-size: 20px;
+        margin-left: auto;
     }
 }

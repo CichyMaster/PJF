@@ -162,13 +162,25 @@
         height: 10%;
     }
 
+    #footer-text {
+        float: left;
+        width: 90%;
+    }
+
+    #footer-button{
+        width: 10%;
+        float: left;
+        margin-top: 1%;
+    }
+
     .statistic-button {
         float: right;
         display: flex;
         justify-content: right;
         margin-right: 5%;
         margin-top: 1%;
-        font-size: 26px;
+        font-size: 20px;
+        margin-left: auto;
     }
 
     .chart {
@@ -209,6 +221,9 @@
     }
 
     #header-right {
+        display: flex;
+        justify-content: right;
+        align-items: center;
         float: left;
         width: 23%;
         height: 100%;
@@ -219,15 +234,19 @@
 
     #obraz {
         float: left;
-        width: 100px;
+        width: 80px;
         height: 100%;
-        padding-right: 5%;
+        padding-right: 1%;
     }
 
     #back-arrow {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
         float: left;
-        width: 80px;
-        height: 80%;
+        width: 70px;
+        height: 65px;
     }
 
     #content-main {
@@ -258,6 +277,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        font-size: 14px;
     }
 
     .right-content-text {
@@ -265,6 +285,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        font-size: 14px;
     }
 
     .butt {
@@ -286,7 +307,6 @@
         margin-right: 15%;
         padding-left: 4%;
         padding-right: 4%;
-        font-size: 16px;
         font-family: 'MV Boli', sans-serif;
         background-color: rgba(128, 128, 128, 0.4);
     }
@@ -333,6 +353,11 @@
         background-color: rgba(128, 128, 128, 0.4);
     }
 
+    #chart-image{
+        width: 90%;
+        height: 90%;
+    }
+
     footer {
         float: left;
         background-color: black;
@@ -341,13 +366,25 @@
         height: 10%;
     }
 
+    #footer-text {
+        float: left;
+        width: 90%;
+    }
+
+    #footer-button{
+        width: 10%;
+        float: left;
+        margin-top: 1%;
+    }
+
     .statistic-button {
         float: right;
         display: flex;
         justify-content: right;
         margin-right: 5%;
         margin-top: 1%;
-        font-size: 26px;
+        font-size: 20px;
+        margin-left: auto;
     }
 
     .chart {

@@ -199,7 +199,17 @@
         color: white;
         width: 100%;
         height: 10%;
-        margin-top: auto;
+    }
+
+    #footer-text {
+        float: left;
+        width: 90%;
+    }
+
+    #footer-button{
+        width: 10%;
+        float: left;
+        margin-top: 1%;
     }
 
     .statistic-button {
@@ -208,7 +218,8 @@
         justify-content: right;
         margin-right: 5%;
         margin-top: 1%;
-        font-size: 26px;
+        font-size: 20px;
+        margin-left: auto;
     }
 }
 @media screen and (max-width: 1400px) {
@@ -242,13 +253,16 @@
 
     }
 
-    #header-right {
+     #header-right {
+        display: flex;
+        justify-content: right;
+        align-items: center;
         float: left;
-        width: 30%;
+        width: 23%;
         height: 100%;
         text-align: right;
         font-size: 20px;
-        padding-right: 1%;
+        padding-right: 2%
     }
 
     #obraz {
@@ -258,7 +272,7 @@
         justify-content: center;
         float: left;
         width: 70px;
-        height: 80%;
+        height: 100%;
     }
 
     #back-arrow {
@@ -268,7 +282,7 @@
         justify-content: center;
         float: left;
         width: 70px;
-        height: 80%;
+        height: 65px;
     }
 
     #content-main {
@@ -293,7 +307,7 @@
         padding-right: 10%;
         padding-top: 5%;
         background-color: rgba(128, 128, 128, 0.4);
-        font-size: 14px;
+        font-size: 16px;
     }
 
     #result-repair table {
@@ -308,25 +322,28 @@
     }
 
     #searchbar {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-        text-align: left;
-        float: left;
-        width: 70%;
-        height: 20%;
-        margin-left: 15%;
-        padding-top: 2%;
-        padding-bottom: 1%;
-        background-color: rgba(128, 128, 128, 0.4);
-        font-size: 20px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    height: 20%;
+    margin-left: 15%;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    background-color: rgba(128, 128, 128, 0.4);
+    font-size: 20px;
+}
 
-    #search-button {
-        font-size: 16px;
+#searchbar form {
+    display: flex;
+    align-items: center;
+}
 
-    }
+#search-button {
+    margin-left: 10px; /* Dodaj margines między polem formularza a przyciskiem */
+    font-size: 20px;
+    margin-bottom: 15px;
+}
 
     #searchbar p {
         font-size: 20px;
@@ -351,7 +368,7 @@
         align-items: center;
         flex-direction: column;
         justify-content: center;
-        font-size: 10px;
+        font-size: 14px;
     }
 
     #search-table table {
@@ -374,13 +391,13 @@
         margin-right: 15%;
         padding-left: 10%;
         padding-right: 10%;
-        padding-top: 5%;
+        padding-top: 2%;
         background-color: rgba(128, 128, 128, 0.4);
         font-size: 34px;
     }
 
     #left-form {
-        font-size: 20px;
+        font-size: 18px;
         float: left;
         text-align: right;
         width: 40%;
@@ -388,7 +405,7 @@
     }
 
     #right-form {
-        font-size: 20px;
+        font-size: 18px;
         float: left;
         text-align: left;
         width: 60%;
@@ -420,7 +437,17 @@
         color: white;
         width: 100%;
         height: 10%;
-        margin-top: auto;
+    }
+
+    #footer-text {
+        float: left;
+        width: 90%;
+    }
+
+    #footer-button{
+        width: 10%;
+        float: left;
+        margin-top: 1%;
     }
 
     .statistic-button {
@@ -429,6 +456,7 @@
         justify-content: right;
         margin-right: 5%;
         margin-top: 1%;
-        font-size: 26px;
+        font-size: 20px;
+        margin-left: auto;
     }
 }
