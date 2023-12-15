@@ -1,5 +1,5 @@
 import base64
-from datetime import datetime
+from datetime import datetime, date
 from io import BytesIO
 
 from django.shortcuts import render, redirect
@@ -99,8 +99,11 @@ def edit(request):
                             raise ValueError("Data przyjęcia jest później niż data zakonczenia")
                     repair.save()
                     return redirect(f'http://127.0.0.1:8000/PhoneService/Edycja/')
-            else:
-                print(form.errors)
+        elif 'add-end-date' in request.POST:
+            if form.is_valid():
+                mutable_data = request.POST.copy()
+                mutable_data['end_date'] = date.today().strftime('%Y-%m-%d')
+                form = EditionForm(mutable_data, initial=form.initial)
     return render(request, "PhoneService/edit.html", {"form": form})
 
 
