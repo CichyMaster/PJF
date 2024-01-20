@@ -267,8 +267,8 @@
         width: 25%;
         height: 50%;
         margin-left: 15%;
-        padding-left: 4%;
-        padding-right: 4%;
+        padding-left: 5%;
+        padding-right: 5%;
         background-color: rgba(128, 128, 128, 0.4);
     }
 
@@ -305,8 +305,8 @@
         width: 25%;
         height: 50%;
         margin-right: 15%;
-        padding-left: 4%;
-        padding-right: 4%;
+        padding-left: 5%;
+        padding-right: 5%;
         font-family: 'MV Boli', sans-serif;
         background-color: rgba(128, 128, 128, 0.4);
     }

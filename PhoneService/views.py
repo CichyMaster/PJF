@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('agg')
 
+
 def index(request):
     return render(request, "PhoneService/index.html")
 
@@ -34,7 +35,7 @@ def create(request):
                 id_worker=Workers.objects.get(acronym=workers),
             )
             repair.save()
-            return redirect(f'http://127.0.0.1:8000/PhoneService/Rejestracja')
+            return redirect(f'../Rejestracja')
     else:
         form = RejestrationForm()
     return render(request, 'PhoneService/create.html', {'form': form})
@@ -47,7 +48,7 @@ def read(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             search_value = form.cleaned_data['search_value']
-            return redirect(f'http://127.0.0.1:8000/PhoneService/Wyszukiwanie/{search_value}')
+            return redirect(f'../Wyszukiwanie/{search_value}')
     return render(request, "PhoneService/read.html", {"list_of_phones": list_of_phones, 'form': form})
 
 
@@ -98,7 +99,7 @@ def edit(request):
                         if repair.admission_date > repair.end_date:
                             raise ValueError("Data przyjęcia jest później niż data zakonczenia")
                     repair.save()
-                    return redirect(f'http://127.0.0.1:8000/PhoneService/Edycja/')
+                    return redirect(f'../Edycja/')
         elif 'add-end-date' in request.POST:
             if form.is_valid():
                 mutable_data = request.POST.copy()
@@ -116,19 +117,26 @@ def delete(request):
         if form.is_valid():
             search_value = form.cleaned_data['search_value']
             if 'search-button' in request.POST:
-                print(search_value)
                 if search_value:
                     repair = Repairs.objects.filter(nr_case=search_value).first()
-
             elif 'delete-button' in request.POST:
-                    print(search_value)
-                    if search_value:
-                        repair = Repairs.objects.filter(nr_case=search_value).first()
-                        if repair:
-                            repair.delete()
-                            return redirect(f'http://127.0.0.1:8000/PhoneService/Usuwanie/')
+                if search_value:
+                    repair = Repairs.objects.filter(nr_case=search_value).first()
+                    if repair:
+                        repair.delete()
+                        return redirect(f'../Usuwanie/')
 
     return render(request, "PhoneService/delete.html", {"repair": repair, 'form': form})
+
+
+def save_chart():
+    # Zapisanie wykresu jako obrazek
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_png = buffer.getvalue()
+    buffer.close()
+    return image_png
 
 
 def statistic(request):
@@ -139,7 +147,11 @@ def statistic(request):
 
             for worker in workers_acronyms:
                 workers_dict[worker] = 0
-            last_month_repairs = Repairs.objects.filter(end_date__month=datetime.now().date().month - 1)
+            today = datetime.now().date()
+            if today.month == 1:
+                last_month_repairs = Repairs.objects.filter(end_date__year=today.year - 1, end_date__month=12)
+            else:
+                last_month_repairs = Repairs.objects.filter(end_date__year=today.year, end_date__month=today.month - 1)
 
             for worker in last_month_repairs:
                 if worker.id_worker.acronym:
@@ -148,23 +160,16 @@ def statistic(request):
             label_of_workers = list(workers_dict.keys())
             label_of_values = list(workers_dict.values())
 
-            #Tworzenie wykresu
+            # Tworzenie wykresu
             plt.bar(label_of_workers, label_of_values)
             plt.xlabel('Pracownicy')
             plt.ylabel('Liczba zakonczonych telefonów')
             plt.title('Rozkład zakończonych telefonów z ostatniego miesiąca')
 
-            #Zapisanie wykresu jako obrazek
-            buffer = BytesIO()
-            plt.savefig(buffer, format='png')
-            buffer.seek(0)
-            image_png = buffer.getvalue()
-            buffer.close()
-
-            #Konwersja obrazka na base64
-            graphic = base64.b64encode(image_png).decode('utf-8')
+            # Konwersja obrazka na base64 (wersje odczytywalną przez przegladarkę)
+            graphic = base64.b64encode(save_chart()).decode('utf-8')
             plt.clf()
-            #przekazanie wykresu do szablonu
+            # przekazanie wykresu do szablonu
             context = {'graphic': graphic}
         elif 'Chart2' in request.POST:
 
@@ -181,15 +186,8 @@ def statistic(request):
             plt.pie(label_of_repairs, labels=label_of_statuses, autopct='%1.1f%%')
             plt.title('Rozkład dokonanych napraw względem rodzaju naprawy')
 
-            # Zapisanie wykresu jako obrazek
-            buffer = BytesIO()
-            plt.savefig(buffer, format='png')
-            buffer.seek(0)
-            image_png = buffer.getvalue()
-            buffer.close()
-
             # Konwersja obrazka na base64
-            graphic = base64.b64encode(image_png).decode('utf-8')
+            graphic = base64.b64encode(save_chart()).decode('utf-8')
             plt.clf()
             # przekazanie wykresu do szablonu
             context = {'graphic': graphic}
