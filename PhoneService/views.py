@@ -86,6 +86,8 @@ def edit(request):
             if form.is_valid():
                 search_value = form.cleaned_data['nr_case']
                 repair = Repairs.objects.filter(nr_case=search_value).first()
+                phone = Phones.objects.get(model=form.cleaned_data['model'])
+                worker = Workers.objects.get(acronym=form.cleaned_data['workers'])
                 if repair:
                     repair.nr_case = form.cleaned_data['nr_case']
                     repair.imei = form.cleaned_data['imei']
@@ -93,8 +95,8 @@ def edit(request):
                     repair.operator = form.cleaned_data['operator']
                     repair.admission_date = form.cleaned_data['admission_date']
                     repair.end_date = form.cleaned_data['end_date']
-                    Phones.id_phone = form.cleaned_data['model']
-                    Workers.id_worker = form.cleaned_data['workers']
+                    repair.id_phone = phone
+                    repair.id_worker = worker
                     if repair.admission_date is not None and repair.end_date is not None:
                         if repair.admission_date > repair.end_date:
                             raise ValueError("Data przyjęcia jest później niż data zakonczenia")
